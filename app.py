@@ -449,8 +449,204 @@ with m2:
     st.plotly_chart(fig_trend, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="panel">', unsafe_allow_html=True)
 top_cities = map_df.sort_values("Reach", ascending=False)[["City", "Region", "Reach", "Engagement Rate", "Posts"]].reset_index(drop=True)
 top_cities.index = top_cities.index + 1
 st.dataframe(top_cities, use_container_width=True, height=320)
 st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown("")
+st.markdown('<div class="section-title">AI Insights</div>', unsafe_allow_html=True)
+
+ai1, ai2, ai3 = st.columns(3)
+
+with ai1:
+    st.markdown("""
+    <div class="metric-card">
+        <div class="metric-label">Insight 01</div>
+        <div class="metric-value" style="font-size: 1.2rem; line-height: 1.35;">Short-form golf content + drinking = +38% engagement</div>
+        <div class="metric-delta">High-confidence content pattern</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with ai2:
+    st.markdown("""
+    <div class="metric-card">
+        <div class="metric-label">Insight 02</div>
+        <div class="metric-value" style="font-size: 1.2rem; line-height: 1.35;">Text-based relatable posts outperform video on Mondays</div>
+        <div class="metric-delta">Best early-week creative format</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with ai3:
+    st.markdown("""
+    <div class="metric-card">
+        <div class="metric-label">Insight 03</div>
+        <div class="metric-value" style="font-size: 1.2rem; line-height: 1.35;">Posts under 8 seconds = highest retention</div>
+        <div class="metric-delta">Strongest short-form hold rate</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
+st.markdown("")
+st.markdown('<div class="section-title">Top Performing Post</div>', unsafe_allow_html=True)
+
+post_url = "https://www.instagram.com/reel/DWFpMxKjWYp"
+post_title = "This is a movement"
+post_views = "1.2M"
+post_likes = "49.3K"
+post_comments = "448"
+
+p1, p2 = st.columns([1.05, 1.35])
+
+with p1:
+    st.markdown(f"""
+    <div class="metric-card" style="min-height: 520px;">
+        <div class="metric-label">Featured Instagram Reel</div>
+        <div class="metric-value" style="font-size: 1.6rem; margin-bottom: 0.7rem;">{post_title}</div>
+        <div style="color:#cbd5e1; font-size:0.98rem; margin-bottom:1rem;">
+            Strong short-form performance with broad reach and unusually high social proof for a single post.
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.85rem;">
+                <div style="color:#94a3b8; font-size:0.82rem;">Views</div>
+                <div style="color:#f8fafc; font-size:1.45rem; font-weight:700; margin-top:0.15rem;">{post_views}</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.85rem;">
+                <div style="color:#94a3b8; font-size:0.82rem;">Likes</div>
+                <div style="color:#f8fafc; font-size:1.45rem; font-weight:700; margin-top:0.15rem;">{post_likes}</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.85rem;">
+                <div style="color:#94a3b8; font-size:0.82rem;">Comments</div>
+                <div style="color:#f8fafc; font-size:1.45rem; font-weight:700; margin-top:0.15rem;">{post_comments}</div>
+            </div>
+        </div>
+        <div style="background:linear-gradient(135deg, rgba(236,72,153,0.16), rgba(249,115,22,0.14)); border:1px solid rgba(255,255,255,0.08); border-radius:18px; padding:1rem; margin-bottom:1rem;">
+            <div style="color:#f8fafc; font-weight:700; margin-bottom:0.35rem;">Why it worked</div>
+            <div style="color:#cbd5e1; font-size:0.95rem; line-height:1.45;">
+                Right to the action, high-stakes betting content, and a format that fits repeat views and low-friction engagement.
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.link_button("Open Instagram Reel", post_url, use_container_width=True)
+
+with p2:
+
+    st.components.v1.html("""
+<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWFpMxKjWYp/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:12px; margin: 0 auto; max-width:540px; width:100%;">
+</blockquote>
+<script async src="//www.instagram.com/embed.js"></script>
+    """, height=540)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
+st.markdown('<div class="section-title">Audience Overlap</div>', unsafe_allow_html=True)
+
+overlap_df = pd.DataFrame(
+    {
+        "Brand": ["Barstool Sports", "DraftKings", "BetMGM", "White Claw", "Fireball"],
+        "Audience Overlap %": [47, 45, 39, 36, 33],
+        "Affinity Score": [178, 174, 156, 149, 143],
+    }
+)
+
+o1, o2 = st.columns([1.0, 1.35])
+
+with o1:
+
+    for brand, overlap, affinity in overlap_df.values:
+        st.markdown(f"""
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.9rem 1rem; margin-bottom:0.75rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.45rem;">
+                <div style="color:#f8fafc; font-weight:700; font-size:1rem;">{brand}</div>
+                <div style="color:#94a3b8; font-size:0.85rem;">Affinity {affinity}</div>
+            </div>
+            <div style="height:10px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden; margin-bottom:0.45rem;">
+                <div style="width:{overlap}%; height:100%; background:linear-gradient(90deg, rgba(34,197,94,0.95), rgba(59,130,246,0.95)); border-radius:999px;"></div>
+            </div>
+            <div style="color:#cbd5e1; font-size:0.9rem;">{overlap}% estimated overlap</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+with o2:
+    st.markdown('<div style="color:#f8fafc; font-size:1rem; font-weight:700; margin:0.2rem 0 0.8rem 0;">Overlap Map</div>', unsafe_allow_html=True)
+
+    fig_overlap = px.scatter(
+        overlap_df,
+        x="Audience Overlap %",
+        y="Affinity Score",
+        size="Audience Overlap %",
+        text="Brand",
+        height=520,
+    )
+    fig_overlap.update_traces(textposition="top center")
+    fig_overlap.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(l=10, r=10, t=10, b=10),
+        xaxis_title="Estimated Audience Overlap %",
+        yaxis_title="Affinity Score",
+        font=dict(color="#e5e7eb"),
+    )
+    st.plotly_chart(fig_overlap, use_container_width=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="section-title">Ask Cortex AI Agent</div>', unsafe_allow_html=True)
+
+st.markdown("""
+<div class="panel" style="padding: 1.2rem;">
+    <div style="color:#f8fafc; font-size:1rem; font-weight:700; margin:0 0 0.35rem 0;">Natural Language Search</div>
+    <div style="color:#94a3b8; font-size:0.95rem; margin:0 0 1rem 0;">
+        Ask a question about audience, content performance, brand overlap, or top posts.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+query = st.text_area(
+    "Ask a question",
+    value="",
+    placeholder="Ex. What content themes drove the highest engagement last month?",
+    height=80,
+    label_visibility="collapsed",
+)
+
+s1, s2, s3, s4 = st.columns(4)
+
+with s1:
+    st.button("Highest LTV customer segments", use_container_width=True)
+with s2:
+    st.button("Best performing reels today", use_container_width=True)
+with s3:
+    st.button("Top audience overlap brands", use_container_width=True)
+with s4:
+    st.button("What drives retention?", use_container_width=True)
+
+st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="panel" style="min-height: 320px; padding: 1.2rem;">
+    <div style="color:#f8fafc; font-size:1rem; font-weight:700; margin:0 0 0.75rem 0;">AI Response</div>
+    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:1rem; margin-bottom:0.9rem;">
+        <div style="color:#94a3b8; font-size:0.82rem; margin-bottom:0.35rem;">Summary</div>
+        <div style="color:#e5e7eb; font-size:0.98rem; line-height:1.55;">
+            Results from Cortex would render here as a concise answer, followed by supporting metrics and the most relevant posts, segments, or audience clusters.
+        </div>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem;">
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.95rem;">
+            <div style="color:#94a3b8; font-size:0.82rem;">Supporting Metric</div>
+            <div style="color:#f8fafc; font-size:1.35rem; font-weight:700; margin-top:0.2rem;">+24%</div>
+            <div style="color:#cbd5e1; font-size:0.9rem; margin-top:0.35rem;">Illustrative lift tied to the queried trend</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.95rem;">
+            <div style="color:#94a3b8; font-size:0.82rem;">Primary Driver</div>
+            <div style="color:#f8fafc; font-size:1.1rem; font-weight:700; margin-top:0.2rem;">Short-form humor</div>
+            <div style="color:#cbd5e1; font-size:0.9rem; margin-top:0.35rem;">Example placeholder for the top returned explanation</div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
