@@ -545,9 +545,9 @@ st.markdown('<div class="section-title">Audience Overlap</div>', unsafe_allow_ht
 
 overlap_df = pd.DataFrame(
     {
-        "Brand": ["Barstool Sports", "DraftKings", "BetMGM", "White Claw", "Fireball"],
-        "Audience Overlap %": [47, 45, 39, 36, 33],
-        "Affinity Score": [178, 174, 156, 149, 143],
+        "Brand": ["Barstool Sports", "DraftKings", "BetMGM", "White Claw"],
+        "Audience Overlap %": [47, 45, 39, 36],
+        "Affinity Score": [178, 174, 156, 149],
     }
 )
 
@@ -580,7 +580,7 @@ with o2:
         y="Affinity Score",
         size="Audience Overlap %",
         text="Brand",
-        height=520,
+        height=425,
     )
     fig_overlap.update_traces(textposition="top center")
     fig_overlap.update_layout(
@@ -595,6 +595,7 @@ with o2:
 
     st.markdown('</div>', unsafe_allow_html=True)
 
+st.markdown("")
 st.markdown('<div class="section-title">Ask Cortex AI Agent</div>', unsafe_allow_html=True)
 
 st.markdown("""
@@ -608,8 +609,7 @@ st.markdown("""
 
 query = st.text_area(
     "Ask a question",
-    value="",
-    placeholder="Ex. What content themes drove the highest engagement last month?",
+    value="Which posts drove the highest engagement in the last 7 days, and what common patterns do they share?",
     height=80,
     label_visibility="collapsed",
 )
@@ -628,25 +628,26 @@ with s4:
 st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
 
 st.markdown("""
-<div class="panel" style="min-height: 320px; padding: 1.2rem;">
-    <div style="color:#f8fafc; font-size:1rem; font-weight:700; margin:0 0 0.75rem 0;">AI Response</div>
-    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:1rem; margin-bottom:0.9rem;">
-        <div style="color:#94a3b8; font-size:0.82rem; margin-bottom:0.35rem;">Summary</div>
-        <div style="color:#e5e7eb; font-size:0.98rem; line-height:1.55;">
-            Results from Cortex would render here as a concise answer, followed by supporting metrics and the most relevant posts, segments, or audience clusters.
-        </div>
+<div class="panel" style="padding: 1.2rem;">
+    <div style="color:#f8fafc; font-size:1rem; font-weight:700; margin:0 0 0.6rem 0;">AI Response</div>
+    <div style="color:#e5e7eb; font-size:0.98rem; line-height:1.6; margin-bottom:0.9rem;">
+        Top posts over the last 7 days averaged 7.8% engagement vs. 4.9% baseline. Short-form reels (&lt;10s) drove 62% of shares despite only 34% of volume.
+        Golf + drinking content performed best, with ~1.5x higher views and shares.
     </div>
-    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem;">
-        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.95rem;">
-            <div style="color:#94a3b8; font-size:0.82rem;">Supporting Metric</div>
-            <div style="color:#f8fafc; font-size:1.35rem; font-weight:700; margin-top:0.2rem;">+24%</div>
-            <div style="color:#cbd5e1; font-size:0.9rem; margin-top:0.35rem;">Illustrative lift tied to the queried trend</div>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem;">
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:0.85rem;">
+            <div style="color:#94a3b8; font-size:0.8rem;">Engagement</div>
+            <div style="color:#f8fafc; font-size:1.25rem; font-weight:700;">7.8%</div>
         </div>
-        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:0.95rem;">
-            <div style="color:#94a3b8; font-size:0.82rem;">Primary Driver</div>
-            <div style="color:#f8fafc; font-size:1.1rem; font-weight:700; margin-top:0.2rem;">Short-form humor</div>
-            <div style="color:#cbd5e1; font-size:0.9rem; margin-top:0.35rem;">Example placeholder for the top returned explanation</div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:0.85rem;">
+            <div style="color:#94a3b8; font-size:0.8rem;">Share Lift</div>
+            <div style="color:#f8fafc; font-size:1.25rem; font-weight:700;">+40%</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:0.85rem;">
+            <div style="color:#94a3b8; font-size:0.8rem;">Best Length</div>
+            <div style="color:#f8fafc; font-size:1.25rem; font-weight:700;">6–9s</div>
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
+
